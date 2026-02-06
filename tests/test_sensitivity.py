@@ -21,6 +21,7 @@ from src.config.company_registry import (
     AMAZON,
     PALANTIR,
     FORD,
+    RESILIENCE,
     SNOWFLAKE,
     get_company,
 )
@@ -70,6 +71,68 @@ class TestCommonWordCompanies:
         result = self.analyzer.analyze(text, ["amazon"])
 
         # Negative keywords should reduce confidence
+        valid_matches = [m for m in result.mentions if m.match_result.is_valid]
+        assert len(valid_matches) == 0
+
+
+class TestResilienceKeyPersonFiltering:
+    """Test that Resilience only matches when key team members are mentioned."""
+
+    def setup_method(self):
+        """Set up analyzer with Resilience."""
+        self.analyzer = SensitivityAnalyzer([RESILIENCE])
+
+    def test_resilience_with_jay_lipman_matches(self):
+        """Resilience mentioned alongside Jay Lipman should match."""
+        text = "Jay Lipman, co-founder of Resilience Investments, discussed the firm's $200M affordable housing strategy."
+        result = self.analyzer.analyze(text, ["resilience"])
+
+        assert len(result.mentions) > 0
+        mention = result.mentions[0]
+        assert mention.company.id == "resilience"
+        assert mention.match_result.is_valid
+        assert "Lipman" in mention.match_result.context_keywords_found or \
+               "Jay Lipman" in mention.match_result.context_keywords_found
+
+    def test_resilience_with_hunter_maats_matches(self):
+        """Resilience mentioned alongside Hunter Maats (CEO) should match."""
+        text = "Resilience CEO Hunter Maats said the firm is capitalizing on housing market shifts."
+        result = self.analyzer.analyze(text, ["resilience"])
+
+        assert len(result.mentions) > 0
+        mention = result.mentions[0]
+        assert mention.match_result.is_valid
+
+    def test_resilience_with_full_company_name_matches(self):
+        """Resilience Investments (full name) with business context should match."""
+        text = "Resilience Investments unveiled its leadership team and a new $500M housing strategy."
+        result = self.analyzer.analyze(text, ["resilience"])
+
+        assert len(result.mentions) > 0
+        mention = result.mentions[0]
+        assert mention.match_result.is_valid
+
+    def test_generic_resilience_rejected(self):
+        """Generic use of 'resilience' without key people should be rejected."""
+        text = "The company showed great resilience in the face of market challenges."
+        result = self.analyzer.analyze(text, ["resilience"])
+
+        valid_matches = [m for m in result.mentions if m.match_result.is_valid]
+        assert len(valid_matches) == 0
+
+    def test_emotional_resilience_rejected(self):
+        """Resilience in mental health/wellness context should be rejected."""
+        text = "Building emotional resilience is key to mental health and wellness therapy."
+        result = self.analyzer.analyze(text, ["resilience"])
+
+        valid_matches = [m for m in result.mentions if m.match_result.is_valid]
+        assert len(valid_matches) == 0
+
+    def test_business_resilience_without_key_people_rejected(self):
+        """Business resilience articles without key team members should be rejected."""
+        text = "Resilience in the housing market requires strong fundamentals and revenue growth."
+        result = self.analyzer.analyze(text, ["resilience"])
+
         valid_matches = [m for m in result.mentions if m.match_result.is_valid]
         assert len(valid_matches) == 0
 

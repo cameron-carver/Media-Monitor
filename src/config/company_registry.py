@@ -116,6 +116,26 @@ ORACLE = Company(
     ),
 )
 
+RESILIENCE = Company(
+    id="resilience",
+    name="Resilience",
+    ticker=None,
+    aliases=["Resilience Investments"],
+    sector="Real Estate / Climate Finance",
+    sensitivity=SensitivityProfile(
+        uniqueness=NameUniqueness.COMMON_WORD,
+        matching_strategy=MatchingStrategy.STRICT,
+        min_confidence=0.65,
+        require_context=True,
+        context_window=50,
+        context_keywords=["Jay Lipman", "Lipman", "Hunter Maats", "Maats",
+                          "Ameet Konkar", "Konkar", "Andy Boyum", "Boyum",
+                          "Resilience Investments"],
+        negative_keywords=["emotional", "psychological", "mental health", "self-help",
+                           "therapy", "coping", "trauma", "wellness"],
+    ),
+)
+
 
 # =============================================================================
 # AMBIGUOUS NAME COMPANIES - Names that could refer to multiple entities
@@ -357,6 +377,7 @@ COMPANY_REGISTRY: dict[str, Company] = {
     "delta": DELTA,
     "visa": VISA,
     "oracle": ORACLE,
+    "resilience": RESILIENCE,
     # Ambiguous name companies
     "morgan_stanley": MORGAN_STANLEY,
     "goldman_sachs": GOLDMAN,
