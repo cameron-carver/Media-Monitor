@@ -55,7 +55,8 @@ TARGET = Company(
     sensitivity=_with_context(
         COMMON_WORD_PROFILE,
         keywords=["retail", "store", "shopping", "TGT", "Minneapolis", "discount",
-                  "Walmart", "retailer", "quarterly", "earnings"],
+                  "Walmart", "retailer", "quarterly", "earnings",
+                  "Michael Fiddelke", "Fiddelke"],
         negative=["aim", "goal", "objective", "shooting", "archery", "bullseye", "military"],
     ),
 )
@@ -83,7 +84,8 @@ DELTA = Company(
     sensitivity=_with_context(
         COMMON_WORD_PROFILE,
         keywords=["airline", "flight", "aviation", "DAL", "Atlanta", "carrier",
-                  "passengers", "routes", "airport"],
+                  "passengers", "routes", "airport",
+                  "Ed Bastian", "Bastian"],
         negative=["math", "change", "difference", "Greek", "variable", "faucet"],
     ),
 )
@@ -97,7 +99,8 @@ VISA = Company(
     sensitivity=_with_context(
         COMMON_WORD_PROFILE,
         keywords=["credit card", "payment", "Mastercard", "transactions", "fintech",
-                  "processing", "debit", "merchant"],
+                  "processing", "debit", "merchant",
+                  "Ryan McInerney", "McInerney"],
         negative=["immigration", "passport", "travel document", "embassy", "consulate"],
     ),
 )
@@ -150,7 +153,8 @@ MORGAN_STANLEY = Company(
     sensitivity=_with_context(
         AMBIGUOUS_NAME_PROFILE,
         keywords=["bank", "investment", "Wall Street", "wealth management", "trading",
-                  "financial", "securities", "broker"],
+                  "financial", "securities", "broker",
+                  "Ted Pick"],
         negative=[],
     ),
 )
@@ -164,7 +168,8 @@ GOLDMAN = Company(
     sensitivity=_with_context(
         AMBIGUOUS_NAME_PROFILE,
         keywords=["bank", "investment", "Wall Street", "trading", "financial",
-                  "securities", "IPO", "M&A"],
+                  "securities", "IPO", "M&A",
+                  "David Solomon", "Solomon"],
         negative=[],
     ),
 )
@@ -178,7 +183,8 @@ FORD = Company(
     sensitivity=_with_context(
         AMBIGUOUS_NAME_PROFILE,
         keywords=["car", "auto", "vehicle", "truck", "F-150", "Mustang", "Detroit",
-                  "automotive", "EV", "electric"],
+                  "automotive", "EV", "electric",
+                  "Jim Farley", "Farley"],
         negative=["Harrison", "Gerald", "president", "river crossing"],
     ),
 )
@@ -264,7 +270,8 @@ NETFLIX = Company(
     sensitivity=replace(
         MODERATE_PROFILE,
         context_keywords=["streaming", "subscribers", "content", "shows", "movies",
-                          "originals", "Reed Hastings"],
+                          "originals", "Reed Hastings", "Ted Sarandos",
+                          "Sarandos", "Greg Peters"],
     ),
 )
 
@@ -295,7 +302,7 @@ PALANTIR = Company(
     sensitivity=replace(
         UNIQUE_NAME_PROFILE,
         context_keywords=["data", "analytics", "government", "Thiel", "Gotham",
-                          "Foundry", "defense"],
+                          "Foundry", "defense", "Alex Karp", "Karp"],
     ),
 )
 
@@ -308,7 +315,7 @@ SNOWFLAKE = Company(
     sensitivity=_with_context(
         UNIQUE_NAME_PROFILE,
         keywords=["data", "cloud", "warehouse", "analytics", "SNOW", "database",
-                  "Slootman"],
+                  "Slootman", "Sridhar Ramaswamy", "Ramaswamy"],
         negative=["weather", "winter", "snow", "frozen", "Christmas"],
     ),
 )
@@ -322,7 +329,7 @@ CROWDSTRIKE = Company(
     sensitivity=replace(
         UNIQUE_NAME_PROFILE,
         context_keywords=["security", "cybersecurity", "endpoint", "Falcon",
-                          "threat", "breach"],
+                          "threat", "breach", "George Kurtz", "Kurtz"],
     ),
 )
 
@@ -335,7 +342,7 @@ DATADOG = Company(
     sensitivity=replace(
         UNIQUE_NAME_PROFILE,
         context_keywords=["monitoring", "observability", "cloud", "APM", "logs",
-                          "infrastructure"],
+                          "infrastructure", "Olivier Pomel", "Pomel"],
     ),
 )
 
@@ -347,7 +354,8 @@ MONGODB = Company(
     sector="Technology",
     sensitivity=replace(
         UNIQUE_NAME_PROFILE,
-        context_keywords=["database", "NoSQL", "cloud", "Atlas", "document database"],
+        context_keywords=["database", "NoSQL", "cloud", "Atlas", "document database",
+                          "CJ Desai", "Desai"],
     ),
 )
 
@@ -360,7 +368,7 @@ SPLUNK = Company(
     sensitivity=replace(
         UNIQUE_NAME_PROFILE,
         context_keywords=["data", "security", "SIEM", "logs", "observability",
-                          "machine data"],
+                          "machine data", "Gary Steele", "Steele"],
     ),
 )
 
